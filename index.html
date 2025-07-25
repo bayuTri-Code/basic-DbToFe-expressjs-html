@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic BE to Fe</title>
+</head>
+<body>
+    <h1>Berita</h1>
+   <Div id="news_list" class="news">
+   </Div>
+   
+   <script>
+     fetch('/news').then(Response => Response.json()).then(data =>{
+        const newsList = data.map(
+            news => `<li> ${news.id} . ${news.judul} : ${news.isi}`
+        ).join('');
+        const newsContainer = document.getElementById('news_list');
+        newsContainer.innerHTML = `<ul>${newsList}</ul>`;
+    })  
+    .catch(error => {
+        console.error('Error fetching news:', error);
+    });
+    </script>
+
+</body>
+</html>
